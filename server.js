@@ -44,9 +44,17 @@ instance.save(function (err) {
 res.send('ok')
   });
 
+  
+app.put('/products/:id',(req, res) => {
+    let dataPut = req.body;
+  console.log(dataPut)
+  console.log(req.params.id)
+  ProductModel.findOneAndUpdate(req.params.id, dataPut);
+  res.send('ok')
+    });
+
 
   app.delete('/products/:id',(req, res) => {
-    console.log('wqew')
     ProductModel.deleteOne({_id:  req.params.id}).then(() => {
       res.send('okey')
     })
