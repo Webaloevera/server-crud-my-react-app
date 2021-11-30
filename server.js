@@ -1,5 +1,4 @@
 const express = require('express');
-const faker = require('faker');
 const app = express();
 const port = 3001;
 const cors = require('cors');
@@ -29,10 +28,10 @@ app.get('/products', (req, res) => {
 });
 
 
-app.get('/products/:id', (req, res) => {
-  let result = forCards.find((item) => item.id === req.params.id)
-  res.send(result)
-})
+// app.get('/products/:id', (req, res) => {
+//   let result = forCards.find((item) => item.id === req.params.id)
+//   res.send(result)
+// })
 
 
 app.post('/products',(req, res) => {
@@ -47,9 +46,9 @@ res.send('ok')
   
 app.put('/products/:id',(req, res) => {
     let dataPut = req.body;
-  console.log(dataPut)
-  console.log(req.params.id)
-  ProductModel.findOneAndUpdate(req.params.id, dataPut);
+  ProductModel.findOneAndUpdate({_id:req.params.id}, dataPut,  (error, doc) => {
+    console.log(error)
+  });
   res.send('ok')
     });
 
