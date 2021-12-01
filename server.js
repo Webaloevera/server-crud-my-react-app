@@ -70,10 +70,11 @@ app.get('/products/:id/edit', (req, res) => {
 app.post('/products',(req, res) => {
   let dataPost = req.body;
 const instance = new ProductModel(dataPost);
+console.log(instance._id)
 instance.save(function (err) {
   console.log(err)
 });
-res.send('ok')
+res.send(instance._id)
   });
 
   
