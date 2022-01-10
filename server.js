@@ -47,10 +47,13 @@ app.use(express.json());
 // }
 // createData();
 
-app.get("/products", (req, res) => {
-  ProductModel.find({}, function (err, products) {
-    res.send(products);
-  });
+app.get("/products", async (req, res) => {
+  try {
+      const products = await ProductModel.find().limit(0).skip(0);
+      res.status(200).send(products);
+  } catch (e) {
+      console.log(e);
+  }
 });
 
 app.get("/product/:id", (req, res) => {
